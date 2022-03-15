@@ -8,22 +8,41 @@
    flex-direction: row;
    margin-top: 24px;
    padding: 10px;
+   background-color: #e5f3ff;
    transition: all .3s linear;
+
+   div {
+      font-size: 24px;
+   }
+
+   &-enter {
+      opacity: 0;
+   }
+
+   &-enter-active {
+      opacity: 1;
+      transition: all 500ms ease-in;
+   }
+
+   &-exit {
+      opacity: 1;
+   }
+
+   &-exit-active {
+      opacity: 0;
+      transition: all 500ms ease-in;
+   }
 
    &:hover {
       background-color: #aad0ef;
       border-radius: 5px;
    }
 
-   div {
-      font-size: 22px;
-      font-weight: 500;
-   }
 }
 
 .close {
    font-weight: 300 !important;
-   color: #ccc;
+   color: #d94460;
    text-decoration: line-through;
 }
 

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import s from './todoList.module.scss'
 import {Button, ButtonGroup, FormControl, Row, Col } from 'react-bootstrap'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrash, faEdit, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
+import { CSSTransition, TransitionGroup,} from 'react-transition-group';
+import './todoList.scss'
 
 const TodoList = ({todo, setTodo}) => {
    const [edit, setEdit] = useState(null)
@@ -61,32 +61,34 @@ const TodoList = ({todo, setTodo}) => {
 
   return (
    <div>
+     <TransitionGroup component={null}>
       <Row>
-         <Col className={s.filterTodo}>
-            <ButtonGroup className={s.btns} aria-label="Basic example">
-               <Button className={s.btnFilter} variant="primary" onClick={() => todoFilter('all')}>Все</Button>
-               <Button className={s.btnFilter} variant="primary" onClick={() => todoFilter(true)}>Открытые</Button>
-               <Button className={s.btnFilter} variant="primary" onClick={() => todoFilter(false)}>Закрытые</Button>
+         <Col className={filterTodo}>
+            <ButtonGroup className='btns' aria-label="Basic example">
+               <Button className='btnFilter' variant="primary" onClick={() => todoFilter('all')}>Все</Button>
+               <Button className='btnFilter' variant="primary" onClick={() => todoFilter(true)}>Открытые</Button>
+               <Button className='btnFilter' variant="primary" onClick={() => todoFilter(false)}>Закрытые</Button>
             </ButtonGroup>
          </Col>
       </Row>
 
       {
          filterTodo.map(item => (
-            <div className={s.list} key={item.id}>
+             <CSSTransition key={item.id} timeout={500} classNames='list'>
+               <div className='list'>
                {
                   edit === item.id ? <div>
                                         <FormControl onChange={(e) => setValue(e.target.value)} type="text" value={value}/>
-                                     </div> : <div className={!item.status ? s.close : ''}>{item.title}</div>
+                                     </div> : <div className={!item.status ? 'close' : ''}>{item.title}</div>
                }
 
                {
                   edit === item.id ? <div>
                                        <Button onClick={() => saveTodo(item.id)}><FontAwesomeIcon icon={faSave}/></Button>
                                      </div> : <div>
-                                                <Button className={s.btn} size='sm' onClick={() => deleteTodo(item.id)}><FontAwesomeIcon icon={faTrash}/></Button>
-                                                <Button className={s.btn} size='sm' onClick={() => editTodo(item.id, item.title)}><FontAwesomeIcon icon={faEdit}/></Button>
-                                                <Button className={s.btn} size='sm' onClick={() => statusTodo(item.id)}>
+                                                <Button className='btn' size='sm' onClick={() => deleteTodo(item.id)}><FontAwesomeIcon icon={faTrash}/></Button>
+                                                <Button className='btn' size='sm' onClick={() => editTodo(item.id, item.title)}><FontAwesomeIcon icon={faEdit}/></Button>
+                                                <Button className='btn' size='sm' onClick={() => statusTodo(item.id)}>
                                                    {
                                                      item.status ? <FontAwesomeIcon icon={faLockOpen}/> : <FontAwesomeIcon icon={faLock}/>
                                                    }
@@ -94,8 +96,10 @@ const TodoList = ({todo, setTodo}) => {
                                               </div>
                }
             </div>
+             </CSSTransition>
          ))
       }
+      </TransitionGroup>
    </div>
   )
 }

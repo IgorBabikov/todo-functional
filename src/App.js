@@ -4,7 +4,6 @@ import TodoList from './component/todoList/TodoList';
 import { useState } from 'react';
 import {Container} from 'react-bootstrap'
 
-import './App.scss';
 
 function App() {
 
