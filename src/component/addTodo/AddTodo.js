@@ -7,6 +7,8 @@ const AddTodo = ( {todo, setTodo} ) => {
    const [value, setValue] = useState('')
 
    const saveTodo = () => {
+      if (value.length == 0) return
+
       setTodo(
          [...todo, {
             id: uuidv4(),

@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import s from './todoList.module.scss'
-import {Button, FormControl } from 'react-bootstrap'
+import {Button, ButtonGroup, FormControl, Row, Col } from 'react-bootstrap'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrash, faEdit, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +8,20 @@ import { faSave, faTrash, faEdit, faLock, faLockOpen } from '@fortawesome/free-s
 const TodoList = ({todo, setTodo}) => {
    const [edit, setEdit] = useState(null)
    const [value, setValue] = useState('')
+   const [filterTodo, setFilterTodo] = useState(todo)
 
+   useEffect(() => {
+      setFilterTodo(todo)
+   }, [todo])
+
+   const todoFilter = (status) => {
+      if (status === 'all') {
+         setFilterTodo(todo)
+      } else {
+         let newTodo = [...todo].filter(item => item.status === status)
+         return setFilterTodo(newTodo)
+      }
+    }
 
    const deleteTodo = (id) => {
      let newTodo = [...todo].filter(item => item.id !== id)
@@ -48,8 +61,18 @@ const TodoList = ({todo, setTodo}) => {
 
   return (
    <div>
+      <Row>
+         <Col className={s.filterTodo}>
+            <ButtonGroup className={s.btns} aria-label="Basic example">
+               <Button className={s.btnFilter} variant="primary" onClick={() => todoFilter('all')}>Все</Button>
+               <Button className={s.btnFilter} variant="primary" onClick={() => todoFilter(true)}>Открытые</Button>
+               <Button className={s.btnFilter} variant="primary" onClick={() => todoFilter(false)}>Закрытые</Button>
+            </ButtonGroup>
+         </Col>
+      </Row>
+
       {
-         todo.map(item => (
+         filterTodo.map(item => (
             <div className={s.list} key={item.id}>
                {
                   edit === item.id ? <div>
