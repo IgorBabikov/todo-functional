@@ -1,0 +1,27 @@
+.btn {
+   margin-left: 10px;
+}
+
+.list {
+   display: flex;
+   justify-content: space-between;
+   flex-direction: row;
+   margin-top: 24px;
+   padding: 10px;
+   transition: all .3s linear;
+
+   &:hover {
+      background-color: #aad0ef;
+      border-radius: 5px;
+   }
+
+   div {
+      font-size: 20px;
+      font-weight: 500;
+   }
+}
+
+.close {
+   color: #ccc;
+   text-decoration: line-through;
+}
