@@ -5,7 +5,7 @@ const Header = () => {
    return (
       <Row>
          <Col>
-            <h1 className={s.title}>ToDo list</h1>
+            <h1 className={s.title}>Todo list</h1>
          </Col>
       </Row>
    )

@@ -29,7 +29,6 @@ const AddTodo = ( {todo, setTodo} ) => {
                   placeholder="введите задачу"/>
             <Button variant="success" onClick={saveTodo}>сохранить</Button>
          </Col>
-
       </Row>
    )
 }

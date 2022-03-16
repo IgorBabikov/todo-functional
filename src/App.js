@@ -1,13 +1,15 @@
 import Header from './component/header/Header';
 import AddTodo from './component/addTodo/AddTodo';
 import TodoList from './component/todoList/TodoList';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Container} from 'react-bootstrap'
 
-
 function App() {
+  const [todo, setTodo] = useState(JSON.parse(localStorage.getItem('todo')) || [])
 
-  const [todo, setTodo] = useState([])
+  useEffect(() => {
+    localStorage.setItem('todo', JSON.stringify(todo))
+  }, [todo])
 
   return (
       <Container>

@@ -63,7 +63,7 @@ const TodoList = ({todo, setTodo}) => {
    <div>
      <TransitionGroup component={null}>
       <Row>
-         <Col className={filterTodo}>
+         <Col className='filterTodo'>
             <ButtonGroup className='btns' aria-label="Basic example">
                <Button className='btnFilter' variant="primary" onClick={() => todoFilter('all')}>Все</Button>
                <Button className='btnFilter' variant="primary" onClick={() => todoFilter(true)}>Открытые</Button>
